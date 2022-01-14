@@ -2,11 +2,11 @@ package ca.maickel.posts.web;
 
 import ca.maickel.posts.model.Post;
 import ca.maickel.posts.service.PostService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(value = "Endpoint for Posts")
+@Tag(name = "Endpoint for Posts")
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
@@ -24,15 +24,27 @@ public class BlogController {
     @Autowired
     PostService postService;
 
-    @ApiOperation(httpMethod = "GET", value = "Get posts filtered by tag", response = Post.class, responseContainer = "List")
-    @ApiResponses(value = {
-            @ApiResponse(code = 400, message = "Invalid request parameters"),
-            @ApiResponse(code = 404, message = "Posts not found"),
-            @ApiResponse(code = 500, message = "The posts could not be fetched")
+    @Operation(summary = "GET Get posts filtered by tag",
+            responses = {
+            @ApiResponse(responseCode = "200", description = "List of posts"),
+            @ApiResponse(responseCode = "400", description = "Invalid request parameters"),
+            @ApiResponse(responseCode = "404", description = "Posts not found"),
+            @ApiResponse(responseCode = "500", description = "The posts could not be fetched")
     })
     @GetMapping("/posts")
     public List<Post> getPosts(@RequestParam String tags, @RequestParam(required = false) String sortBy, @RequestParam(required = false) String direction) {
         return postService.getPosts(tags, sortBy, direction);
     }
+
+    @Operation(summary = "GET Get posts filtered by tag",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Success"),
+                    @ApiResponse(responseCode = "500", description = "Server error")
+            })
+    @GetMapping("/ping")
+    public JSONObject getStatus() {
+        return new JSONObject("{success: true}");
+    }
+
 
 }

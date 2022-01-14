@@ -5,6 +5,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-public interface PostService {
-    List<Post> getPosts(String tags, String sortBy, String direction);
+public interface PostServiceCacheable {
+        List<Post> getPost(String health);
 }

@@ -3,6 +3,7 @@ package ca.maickel.posts.service.impl;
 import ca.maickel.posts.exception.PostNotFoundException;
 import ca.maickel.posts.model.Post;
 import ca.maickel.posts.service.PostService;
+import ca.maickel.posts.service.PostServiceCacheable;
 import ca.maickel.posts.web.resources.BlogResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,11 +32,15 @@ public class PostServiceImplTest {
     @Mock
     private RestTemplate restTemplate;
 
+    @Mock
+    private PostServiceCacheable postServiceCacheableImpl;
+
     private final String RESOURCE_PATH = "${hatchways.api.uri}";
 
     @BeforeEach
     public void setup() {
-        postService = new PostServiceImpl(RESOURCE_PATH, restTemplate);
+        postServiceCacheableImpl = new PostServiceCacheableImpl(RESOURCE_PATH, restTemplate);
+        postService = new PostServiceImpl(postServiceCacheableImpl);
     }
 
     @Test
@@ -54,7 +59,7 @@ public class PostServiceImplTest {
         when(restTemplate.getForEntity(healthUri, BlogResponse.class))
                 .thenReturn(new ResponseEntity<>(blog1, HttpStatus.OK));
 
-        List<Post> result1 = postService.getPost("health", restTemplate);
+        List<Post> result1 = postServiceCacheableImpl.getPost("health");
 
         Assertions.assertEquals(result1, posts);
 
@@ -63,7 +68,7 @@ public class PostServiceImplTest {
         when(restTemplate.getForEntity(healthUri, BlogResponse.class))
                 .thenReturn(new ResponseEntity<>(blog2, HttpStatus.OK));
 
-        List<Post> result2 = postService.getPost("health", restTemplate);
+        List<Post> result2 = postServiceCacheableImpl.getPost("health");
 
         Assertions.assertTrue(result2.isEmpty());
     }

@@ -35,9 +35,6 @@ public class PostComparator implements Comparator<Post> {
             return 0;
         }
         switch (comparatorField) {
-            case "id":
-                result = post1.getId().compareTo(post2.getId());
-                break;
             case "reads":
                 result = post1.getReads().compareTo(post2.getReads());
                 break;
@@ -48,7 +45,7 @@ public class PostComparator implements Comparator<Post> {
                 result = post1.getPopularity().compareTo(post2.getPopularity());
                 break;
             default:
-                result = 0;
+                result = post1.getId().compareTo(post2.getId());
         }
         if("desc".equals(direction)) {
             result *= -1;

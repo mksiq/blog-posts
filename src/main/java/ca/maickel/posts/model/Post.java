@@ -2,7 +2,6 @@ package ca.maickel.posts.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 import java.math.BigInteger;
 import java.util.Set;
@@ -14,7 +13,6 @@ import java.util.Set;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ToString
 public class Post {
-    @Id
     Integer id;
     String author;
     Integer authorId;
