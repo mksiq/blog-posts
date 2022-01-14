@@ -26,7 +26,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         Map<String, String> errorMessage = new HashMap<>();
-        errorMessage.put("error", "Route does not exist. Try: /api/posts?tags=tech;health");
+        errorMessage.put("error", "Route does not exist. Try: /api/posts?tags=tech,health");
         return handleExceptionInternal(ex, errorMessage, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 

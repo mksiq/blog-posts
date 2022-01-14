@@ -17,7 +17,7 @@ Overall, this was a fun project that I enjoyed spending my time on, so thank you
 > java -jar ./target/posts-0.0.1-SNAPSHOT.jar
 
 ### Sample Query
-> curl http://localhost:8080/api/posts?tags=tech
+> curl http://localhost:8080/api/posts?tags=tech,health,science
 
 
 
