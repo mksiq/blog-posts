@@ -34,7 +34,7 @@ public class PostServiceImpl implements PostService {
 
         PostComparator comparator = new PostComparator(sortBy, direction);
 
-        List<String> tagsList = Arrays.asList(tags.split(";"));
+        List<String> tagsList = Arrays.asList(tags.split(","));
 
         List<Post> result = tagsList.stream()
                 .map(tag ->

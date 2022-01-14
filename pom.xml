@@ -29,12 +29,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20211205</version>
-		</dependency>
-
 		<!-- Junit-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
