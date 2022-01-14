@@ -42,6 +42,7 @@ public class BlogController {
                     @ApiResponse(responseCode = "500", description = "Server error")
             })
     @GetMapping("/ping")
+    // this could be replaced by spring actuator, but I did not think it would be worth all the extra configurations for custom route
     public JSONObject getStatus() {
         return new JSONObject("{success: true}");
     }

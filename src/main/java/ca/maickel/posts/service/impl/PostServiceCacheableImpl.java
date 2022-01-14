@@ -18,6 +18,7 @@ import java.util.List;
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
+// Handles caching
 public class PostServiceCacheableImpl implements PostServiceCacheable {
 
     @Value("${hatchways.api.uri}")
