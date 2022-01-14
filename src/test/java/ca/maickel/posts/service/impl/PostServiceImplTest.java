@@ -110,7 +110,7 @@ public class PostServiceImplTest {
                 .thenReturn(new ResponseEntity<>(blog2, HttpStatus.OK));
 
 
-        List<Post> result1 = postService.getPosts("health;tech", "id", "desc");
+        List<Post> result1 = postService.getPosts("health,tech", "id", "desc");
 
         List<Post> expected = Stream.of(postsHealth, postsTech )
                 .flatMap(Collection::stream)

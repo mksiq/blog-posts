@@ -6,14 +6,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Tag(name = "Endpoint for Posts")
 @RestController
@@ -43,8 +44,10 @@ public class BlogController {
             })
     @GetMapping("/ping")
     // this could be replaced by spring actuator, but I did not think it would be worth all the extra configurations for custom route
-    public JSONObject getStatus() {
-        return new JSONObject("{success: true}");
+    public Map<String, Boolean> getStatus() {
+        Map<String, Boolean> status = new HashMap<>();
+        status.put("success", true);
+        return status;
     }
 
 
